@@ -96,6 +96,24 @@
             justify-content: center;
 
         }
+        #contenedorLogin{
+            background-color: gainsboro;
+            padding: 20px;
+            border-style: solid;
+            border-color: black;
+            border-width: 3px;
+            border-radius: 20px;
+        }
+        #botonConfirmar{
+            display: block;
+            margin: 15px;
+            width: 100px;
+            height: 50px;
+            border-style: solid;
+            border-color: black;
+            font-weight: bold;
+            
+        }
     </style>
 
     <script>
@@ -105,10 +123,63 @@
             { nombre: "alfredo", numero: 987654321, },
         ]
 
+        let htmlContatos
+
         function inicio() {
-            darEventosBoton();
+            htmlContatos = document.body.innerHTML;
+            mostrarLogin();
         }
-        function darEventosBoton() {
+
+
+        function mostrarLogin(){
+            document.body.innerHTML = "";
+
+            let texto1 = document.createElement("p");
+            texto1.innerText = "Introduce tu nombre de usuario (es samuel)";
+
+            let nombre = document.createElement("input");
+            nombre.type = "text";
+
+            let texto2 = document.createElement("p");
+            texto2.innerText = "Introduce tu contraseña (es 1234)";
+
+            let contraseña = document.createElement("input");
+            contraseña.type = "password";
+
+            let div = document.createElement("div");
+            div.setAttribute("id","contenedorLogin")
+
+        
+            div.appendChild(texto1);
+            div.appendChild(nombre);
+            div.appendChild(texto2);
+            div.appendChild(contraseña);
+
+            let br = document.createElement("br");
+            div.appendChild(br);
+            
+
+            let boton = document.createElement("button");
+            boton.innerText = "CONFIRMAR";
+            boton.setAttribute("id","botonConfirmar");
+            boton.addEventListener("click",()=>{validarUsuario(nombre,contraseña)});
+
+            div.appendChild(boton);
+            document.body.appendChild(div);
+        }
+
+        function validarUsuario(nombre,contraseña){
+            if(nombre.value === "samuel" && contraseña.value == 1234){
+                alert("   BIENVENIDO");
+                document.body.innerHTML = htmlContatos;
+                empezar();
+            }else{
+                alert("   USUARIO INCORRECTO")
+            }
+        }
+
+
+        function empezar() {
 
             for (let i = 1; i <= 6; i++) {
                 let boton = document.getElementById("boton" + i);
@@ -281,14 +352,7 @@
 
         function salir() {
             document.body.innerHTML = "";
-
-            let div = document.createElement("div");
-            div.id = "textoFinal";
-            let p = document.createElement("h1");
-            p.innerText = "Has salido\n Gracias por utilizar la agenda de contactos.\n";
-
-            div.appendChild(p);
-            document.body.appendChild(div);
+            mostrarLogin();
         }
 
         window.addEventListener("load", () => { inicio() });
