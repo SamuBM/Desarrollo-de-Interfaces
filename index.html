@@ -169,13 +169,17 @@
         }
 
         function validarUsuario(nombre,contraseña){
-            if(nombre.value === "samuel" && contraseña.value == 1234){
-                alert("   BIENVENIDO");
+
+            if(nombre.value === "" || contraseña.value === ""){
+
+            } else if(nombre.value === "samuel" && contraseña.value == 1234){
                 document.body.innerHTML = htmlContatos;
                 empezar();
             }else{
-                alert("   USUARIO INCORRECTO")
+                alert("   USUARIO INCORRECTO");
             }
+
+            
         }
 
 
